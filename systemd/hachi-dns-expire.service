@@ -1,0 +1,7 @@
+[Unit]
+Description=Hachi Smart DNS expiry sweep
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/hachi-dns
+ExecStart=/usr/bin/python3 /opt/hachi-dns/dns_expire.py

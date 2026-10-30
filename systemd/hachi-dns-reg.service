@@ -1,0 +1,14 @@
+[Unit]
+Description=Hachi Smart DNS registration service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/hachi-dns
+ExecStart=/usr/bin/python3 /opt/hachi-dns/reg_server.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

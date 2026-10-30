@@ -1,0 +1,9 @@
+[Unit]
+Description=Hourly Hachi Smart DNS expiry sweep
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
