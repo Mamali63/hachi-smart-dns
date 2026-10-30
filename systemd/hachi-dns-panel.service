@@ -1,0 +1,15 @@
+[Unit]
+Description=Hachi Smart DNS admin panel
+After=network-online.target hachi-dns-reg.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/hachi-dns
+Environment=HACHI_PANEL_PORT=8080
+ExecStart=/usr/bin/python3 /opt/hachi-dns/admin_panel.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
