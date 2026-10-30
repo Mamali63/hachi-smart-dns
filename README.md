@@ -164,7 +164,9 @@ config-samples/
 
 ## Android app
 
-The app (`client/hachi-dns.apk`, version 1.2.0) works with any server: the customer first enters the **server address** the admin gave them (like `http://SERVER_IP:8792`), then enters the user code and presses Start. No server address is hard-coded in the app. The app is not a VPN; it only registers the home IP and must be opened on the same home Wi-Fi.
+The app (`client/hachi-dns.apk`, version 1.2.0): the customer just enters the **user code** and presses Start — no server address to enter. The app is not a VPN; it only registers the home IP and must be opened on the same home Wi-Fi.
+
+**Download the app:** from the [Releases](https://github.com/Mamali63/hachi-smart-dns/releases) of this repo, download `hachi-dns.apk`.
 
 ## Contact
 
