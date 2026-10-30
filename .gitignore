@@ -1,0 +1,10 @@
+# هرگز این فایل‌ها را commit نکنید — اطلاعات مشتری و سرور زنده
+customers.json
+whitelist.txt
+whitelist.json
+dns_servers.json
+version.json
+admin.json
+*.tmp
+__pycache__/
+*.pyc
