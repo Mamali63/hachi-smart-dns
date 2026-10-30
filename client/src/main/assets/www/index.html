@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>اسمارت DNS هاچی</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Tahoma,sans-serif;background:#eef2f8;color:#1e293b;padding-bottom:90px}
+header{background:linear-gradient(135deg,#0d47a1,#1565c0,#42a5f5);color:#fff;padding:22px 16px 18px;text-align:center;border-radius:0 0 24px 24px;box-shadow:0 4px 20px rgba(13,71,161,.35)}
+header img{width:84px;height:84px;border-radius:50%;border:3px solid rgba(255,255,255,.9);object-fit:cover;background:#fff}
+header h1{font-size:20px;margin-top:8px}header p{font-size:12px;opacity:.92;margin-top:4px;line-height:1.8}
+.badge{font-size:11px;background:rgba(255,255,255,.25);border-radius:20px;padding:3px 10px}
+.card{background:#fff;border-radius:20px;padding:16px;margin:14px;box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.card h3{font-size:16px;margin-bottom:10px;color:#0d47a1}
+label{display:block;font-size:13px;margin:8px 0 4px;color:#64748b}
+input{width:100%;padding:12px;border:1.5px solid #cbd5e1;border-radius:12px;font-size:15px;font-family:inherit;direction:ltr;text-align:left}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:14px;font-size:16px;font-family:inherit;cursor:pointer;margin-top:12px;font-weight:bold}
+.btn-p{background:linear-gradient(135deg,#1565c0,#42a5f5);color:#fff;box-shadow:0 4px 12px rgba(21,101,192,.35)}
+.btn-g{background:#2e7d32;color:#fff}.btn-o{background:#ef6c00;color:#fff}.btn-line{background:#fff;color:#1565c0;border:1.5px solid #1565c0}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.row button{flex:0 0 96px;margin-top:0}
+.info{font-size:14px;line-height:2.1}.info b{color:#0d47a1}
+.warn{background:#fff8e1;border:1px dashed #ef6c00;border-radius:12px;padding:12px;font-size:12px;line-height:2;margin-top:12px}
+.msg{margin-top:10px;font-size:13px;line-height:2;color:#334155}
+.step{display:flex;gap:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px;margin-bottom:10px}
+.step .n{flex:0 0 32px;height:32px;border-radius:50%;background:#1565c0;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.step p{font-size:13px;line-height:2}
+code{direction:ltr;display:inline-block;background:#e3f2fd;padding:2px 10px;border-radius:8px;font-weight:bold}
+.page{display:none}.page.active{display:block}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e2e8f0;display:flex;z-index:10;box-shadow:0 -2px 12px rgba(0,0,0,.06)}
+nav button{flex:1;padding:10px 4px 12px;border:none;background:none;font-family:inherit;font-size:12px;color:#64748b;cursor:pointer}
+nav button .ic{font-size:22px;display:block}nav button.on{color:#1565c0;font-weight:bold}
+.dnsbox{background:linear-gradient(135deg,#e3f2fd,#fff);border-radius:14px;padding:12px;text-align:center;font-size:16px;line-height:2}
+</style>
+</head>
+<body>
+<header><img src="logo.png" alt="هاچی"><h1>🐶 اسمارت DNS هاچی <span class="badge">نسخه ۱٫۲٫۰</span></h1><p>فقط آی‌پی را ثبت می‌کند؛ VPN نیست و ترافیک را رد نمی‌کند</p></header>
+
+<div class="page active" id="pg-home">
+<div class="card"><h3>🌐 آدرس سرور</h3>
+<label>آدرس سرور را ادمین به شما می‌دهد (مثل http://1.2.3.4:8792)</label>
+<div class="row"><input id="server" placeholder="http://SERVER_IP:8792"><button class="btn btn-line" onclick="saveServerBtn()">💾 ذخیره</button></div>
+<div class="msg" id="srv-msg"></div>
+</div>
+<div class="card"><h3>🔑 یوزر / کد اشتراک</h3>
+<label>کدی که هاچی به شما داده است را وارد کنید</label>
+<input id="code" placeholder="hachi-xxxx-xxxx-xxxx-xxxx">
+<button class="btn btn-p" onclick="doStart()">▶️ استارت</button>
+<div class="warn">⚠️ این برنامه را روی <b>همان وای‌فای خانه</b> اجرا کنید، نه اینترنت موبایل. هر وقت آی‌پی خانه‌تان عوض شد، دوباره استارت بزنید؛ آی‌پی قبلی پاک و آی‌پی تازه جای آن می‌نشیند. تاریخ شروع برای یوزر قدیمی صفر نمی‌شود.</div>
+<div class="msg" id="msg"></div>
+</div>
+<div class="card"><h3>📊 وضعیت اشتراک</h3>
+<div class="info" id="status">هنوز استارت نزده‌اید.</div>
+<button class="btn btn-line" onclick="doStatus()">🔄 بررسی وضعیت</button>
+</div>
+</div>
+
+<div class="page" id="pg-tutor">
+<div class="card"><h3>📖 آموزش ست‌کردن DNS در کنسول</h3>
+<p style="font-size:13px;line-height:2;color:#475569;margin-bottom:12px">اول در برنامه استارت بزنید تا آی‌پی خانه‌تان ثبت شود، بعد این قدم‌ها را در پلی‌استیشن انجام دهید:</p>
+<div class="step"><div class="n">۱</div><p>در پلی‌استیشن بروید به <b>Settings</b> و بعد <b>Network</b> و بعد <b>Set Up Internet Connection</b>.</p></div>
+<div class="step"><div class="n">۲</div><p>وای‌فای خانه را انتخاب کنید، بعد <b>Custom</b> را بزنید.</p></div>
+<div class="step"><div class="n">۳</div><p><b>IP Address Settings</b> را روی <b>Automatic</b> و <b>DHCP Host Name</b> را روی <b>Do Not Specify</b> بگذارید.</p></div>
+<div class="step"><div class="n">۴</div><p><b>DNS Settings</b> را روی <b>Manual</b> بگذارید و Primary و Secondary را هر دو عدد زیر وارد کنید.</p></div>
+<div class="step"><div class="n">۵</div><p><b>MTU</b> روی <b>Automatic</b>، <b>Proxy Server</b> روی <b>Do Not Use</b>، بعد <b>Test</b> را بزنید.</p></div>
+<div class="step"><div class="n">۶</div><p>بعد از ست‌کردن، کنسول را <b>کامل خاموش و روشن</b> کنید (نه Rest Mode).</p></div>
+<div class="warn">⛔ Secondary را هرگز به <code>8.8.8.8</code> برنگردانید؛ هر دو DNS باید همان آدرسی باشد که ادمین داده است.</div>
+</div>
+</div>
+
+<div class="page" id="pg-dns">
+<div class="card"><h3>🌐 آدرس‌های DNS برای کنسول</h3>
+<div class="dnsbox">Primary: <code id="dns1">—</code><br>Secondary: <code id="dns2">—</code></div>
+<p style="font-size:13px;line-height:2;color:#475569;margin-top:12px">اگر سرور ما عوض شد و DNS تازه آمد، با ریفرش آن را بگیرید و طبق صفحهٔ آموزش در کنسول ست کنید:</p>
+<button class="btn btn-o" onclick="doRefreshDNS()">🔄 ریفرش DNS</button>
+<div class="msg" id="dns-msg"></div>
+</div>
+</div>
+
+<div class="page" id="pg-upd">
+<div class="card"><h3>⬆️ آپدیت برنامه</h3>
+<div class="msg" id="upd-msg">برای بررسی نسخهٔ تازه، دکمه را بزنید.</div>
+<button class="btn btn-g" onclick="doUpdate()">🔄 بررسی آپدیت</button>
+<p style="font-size:12px;color:#64748b;margin-top:10px;line-height:2">در نسخهٔ ۱٫۲٫۰، آپدیت فقط نسخه را چک می‌کند؛ دانلود نسخهٔ تازه در نسخه‌های بعدی از همین‌جا فعال می‌شود.</p>
+</div>
+</div>
+
+<nav>
+<button class="on" onclick="go('pg-home',this)"><span class="ic">🏠</span>خانه</button>
+<button onclick="go('pg-tutor',this)"><span class="ic">📖</span>آموزش</button>
+<button onclick="go('pg-dns',this)"><span class="ic">🌐</span>DNS</button>
+<button onclick="go('pg-upd',this)"><span class="ic">⬆️</span>آپدیت</button>
+</nav>
+
+<script>
+var VER = 3;
+function $(id){return document.getElementById(id)}
+function savedCode(){try{return localStorage.getItem("hachi_dns_code")||""}catch(e){return ""}}
+function saveCode(c){try{localStorage.setItem("hachi_dns_code",c)}catch(e){}}
+function savedServer(){try{return localStorage.getItem("hachi_dns_server")||""}catch(e){return ""}}
+function saveServer(s){try{localStorage.setItem("hachi_dns_server",s)}catch(e){}}
+function base(){ return savedServer().trim().replace(/\/+$/,""); }
+function needServer(){ if(!base()){ $("msg").textContent="اول آدرس سرور را وارد کنید (ادمین به شما می‌دهد)."; return true; } return false; }
+function saveServerBtn(){
+  var s = $("server").value.trim().replace(/\/+$/,"");
+  if(!s){ $("srv-msg").textContent="اول آدرس سرور را وارد کنید."; return; }
+  if(!/^https?:\/\//.test(s)) s = "http://" + s;
+  saveServer(s); $("server").value = s;
+  $("srv-msg").textContent="✅ آدرس سرور ذخیره شد: " + s;
+}
+function go(id,btn){
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});
+  $(id).classList.add("active");
+  document.querySelectorAll("nav button").forEach(function(b){b.classList.remove("on")});
+  if(btn) btn.classList.add("on");
+}
+window.onload = function(){
+  var s = savedServer(); if(s){$("server").value=s;}
+  var c = savedCode(); if(c){$("code").value=c; if(s) doStatus();}
+};
+function showStatus(d){
+  var rem = d.remaining || {};
+  var days = Math.floor((rem.total_seconds||0)/86400);
+  var hours = Math.floor(((rem.total_seconds||0)%86400)/3600);
+  var st = d.status==="active" ? "✅ فعال" : (d.status==="expired" ? "⛔ منقضی شده" : "⏳ هنوز شروع نشده");
+  var html = "وضعیت: <b>"+st+"</b><br>یوزر: <b>"+d.code+"</b>";
+  if(d.display_name) html += "<br>نام: <b>"+d.display_name+"</b>";
+  html += "<br>ماه خریده‌شده: <b>"+d.months+"</b>";
+  if(d.start) html += "<br>تاریخ شروع: <b>"+d.start+"</b>";
+  if(d.end) html += "<br>تاریخ پایان: <b>"+d.end+"</b>";
+  if(d.status==="active") html += "<br>باقی‌مانده: <b>"+days+" روز و "+hours+" ساعت</b>";
+  if(d.current_ip) html += "<br>آی‌پی ثبت‌شدهٔ شما: <code>"+d.current_ip+"</code>";
+  if(d.primary) {$("dns1").textContent=d.primary; $("dns2").textContent=d.secondary||d.primary;}
+  $("status").innerHTML = html;
+}
+function doStart(){
+  if(needServer()) return;
+  var c = $("code").value.trim().toLowerCase();
+  if(!c){$("msg").textContent="اول کد را وارد کنید."; return;}
+  saveCode(c); $("msg").textContent="⏳ در حال ثبت...";
+  fetch(base()+"/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:c})})
+  .then(function(r){return r.json().then(function(j){return {ok:r.ok, j:j}})})
+  .then(function(x){
+    if(!x.ok){$("msg").textContent="❌ "+(x.j.error||"خطا"); return;}
+    showStatus(x.j);
+    $("msg").textContent = x.j.status==="expired" ? "⛔ اشتراک منقضی شده؛ برای تمدید به هاچی پیام بدهید." : (x.j.first_start ? "✅ شروع شد! ماه شما از همین لحظه شروع شد." : "✅ ثبت شد؛ آی‌پی تازه جای آی‌پی قبلی نشست و تاریخ شما عوض نشد.");
+  }).catch(function(){ $("msg").textContent="❌ به سرور وصل نشد؛ اینترنت و وای‌فای خانه را چک کنید."; });
+}
+function doStatus(){
+  if(needServer()) return;
+  var c = $("code").value.trim().toLowerCase() || savedCode();
+  if(!c){$("msg").textContent="اول کد را وارد کنید."; return;}
+  $("code").value=c;
+  fetch(base()+"/status?code="+encodeURIComponent(c))
+  .then(function(r){return r.json().then(function(j){return {ok:r.ok, j:j}})})
+  .then(function(x){
+    if(!x.ok){$("msg").textContent="❌ "+(x.j.error||"خطا"); return;}
+    showStatus(x.j); $("msg").textContent="✅ وضعیت به‌روز شد.";
+  }).catch(function(){ $("msg").textContent="❌ به سرور وصل نشد."; });
+}
+function doRefreshDNS(){
+  if(needServer()){ $("dns-msg").textContent="اول آدرس سرور را وارد کنید (ادمین به شما می‌دهد)."; return; }
+  fetch(base()+"/dns-info").then(function(r){return r.json()}).then(function(d){
+    $("dns1").textContent=d.primary; $("dns2").textContent=d.secondary;
+    $("dns-msg").textContent="✅ آدرس DNS تازه گرفته شد: "+d.primary+" و "+d.secondary+" — آن را طبق صفحهٔ آموزش در کنسول ست کنید.";
+  }).catch(function(){ $("dns-msg").textContent="❌ به سرور وصل نشد."; });
+}
+function doUpdate(){
+  if(needServer()){ $("upd-msg").textContent="اول آدرس سرور را وارد کنید (ادمین به شما می‌دهد)."; return; }
+  fetch(base()+"/version").then(function(r){return r.json()}).then(function(d){
+    if(d.versionCode > VER) $("upd-msg").textContent="🎉 نسخهٔ تازه "+d.versionName+" آمده است؛ دانلود آن در نسخهٔ بعدی از همین‌جا فعال می‌شود.";
+    else $("upd-msg").textContent="✅ آخرین نسخه را دارید: "+d.versionName;
+  }).catch(function(){ $("upd-msg").textContent="❌ به سرور وصل نشد."; });
+}
+</script>
+</body>
+</html>
