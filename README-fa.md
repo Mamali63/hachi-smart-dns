@@ -44,7 +44,13 @@ python3 /opt/hachi-dns/dns_admin.py add 1 "first customer"
 
 ## نصب آسان (یک دستور)
 
+روی یک VPS تازه با اوبونتو ۲۴٫۰۴ و دسترسی root، این دستورها را دونه‌دونه بزنید:
+
 ```bash
+sudo apt-get update -y
+sudo apt-get install -y git
+git clone https://github.com/Mamali63/hachi-smart-dns.git
+cd hachi-smart-dns
 sudo bash install.sh
 ```
 

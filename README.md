@@ -23,7 +23,13 @@ A registration and management service for Smart DNS with a single-IP whitelist â
 
 ## Easy install (one command)
 
+On a fresh Ubuntu 24.04 VPS with root access, run these one by one:
+
 ```bash
+sudo apt-get update -y
+sudo apt-get install -y git
+git clone https://github.com/Mamali63/hachi-smart-dns.git
+cd hachi-smart-dns
 sudo bash install.sh
 ```
 
