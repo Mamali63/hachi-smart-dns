@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Hachi Smart DNS — installer (released 2026-10-30)
-# Run as root on a fresh Ubuntu 24.04 VPS, from the repo directory:
+# One-liner (fresh VPS, nothing else needed — like 3x-ui):
+#   sudo bash <(curl -Ls https://raw.githubusercontent.com/Mamali63/hachi-smart-dns/main/install.sh)
+# Or from a cloned repo:
 #   sudo bash install.sh
 # What it does:
 #   - installs python3, unbound, sniproxy
@@ -14,7 +16,17 @@
 #   - set the monthly price or issue customer codes (use dns_admin.py)
 set -euo pipefail
 
-REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+# --- find the repo files ---------------------------------------------------
+# If run from a cloned repo, the files sit next to this script.
+# If run as a one-liner (bash <(curl ...)), there is no repo on disk yet,
+# so REPO_DIR stays empty here and the files are downloaded after the
+# packages step (once curl is guaranteed to be installed).
+SCRIPT_DIR="$(cd "$(dirname "$0")" 2>/dev/null && pwd || true)"
+if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/server/reg_server.py" ]; then
+  REPO_DIR="$SCRIPT_DIR"
+else
+  REPO_DIR=""
+fi
 INSTALL_DIR="/opt/hachi-dns"
 
 if [ "$(id -u)" -ne 0 ]; then
@@ -76,6 +88,21 @@ ask_port
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -y
 apt-get install -y python3 unbound sniproxy curl
+
+# --- fetch repo files (one-liner mode only) --------------------------------
+# When run as bash <(curl ...), REPO_DIR is empty: download the repo
+# tarball from GitHub (curl is installed now, so this is safe).
+if [ -z "$REPO_DIR" ]; then
+  echo "Downloading Hachi Smart DNS files from GitHub... / در حال دانلود فایل‌ها از گیت‌هاب..."
+  TMP_REPO="$(mktemp -d)"
+  curl -fsSL "https://github.com/Mamali63/hachi-smart-dns/archive/refs/heads/main.tar.gz" -o "$TMP_REPO/repo.tar.gz"
+  tar -xzf "$TMP_REPO/repo.tar.gz" -C "$TMP_REPO"
+  REPO_DIR="$TMP_REPO/hachi-smart-dns-main"
+  if [ ! -f "$REPO_DIR/server/reg_server.py" ]; then
+    echo "Download failed: repo files not found. / دانلود نشد." >&2
+    exit 1
+  fi
+fi
 
 # --- registration service + admin panel ----------------------------------
 mkdir -p "$INSTALL_DIR"
