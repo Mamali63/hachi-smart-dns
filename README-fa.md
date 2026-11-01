@@ -4,19 +4,72 @@
   <img src="./media/hachi-logo.png" width="160" height="160" alt="Hachi — حاجی">
 </p>
 
-<h1 align="center">Hachi Smart DNS — هچی اسمارت دی‌ان‌اس</h1>
+<h1 align="center">Hachi Smart DNS — هاچی اسمارت دی‌ان‌اس</h1>
 
 <p align="center">
-  <a href="https://github.com/Mamali63/hachi-smart-dns/releases"><img src="https://img.shields.io/github/v/release/Mamali63/hachi-smart-dns" alt="Release"></a>
-  <a href="https://github.com/Mamali63/hachi-smart-dns/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPL%20v3-blue.svg" alt="License"></a>
-  <a href="https://github.com/Mamali63/hachi-smart-dns/stargazers"><img src="https://img.shields.io/github/stars/Mamali63/hachi-smart-dns?style=social" alt="Stars"></a>
+  <a href="https://github.com/Mamali63/hachi-smart-dns/releases"><img src="https://img.shields.io/github/v/release/Mamali63/hachi-smart-dns?style=for-the-badge&color=0ea5e9" alt="Release"></a>
+  <a href="https://github.com/Mamali63/hachi-smart-dns/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPL%20v3-14b8a6?style=for-the-badge" alt="License"></a>
+  <a href="https://github.com/Mamali63/hachi-smart-dns/stargazers"><img src="https://img.shields.io/github/stars/Mamali63/hachi-smart-dns?style=for-the-badge&color=2563eb" alt="Stars"></a>
 </p>
 
 <p align="center">
-سرویس ثبت و مدیریت Smart DNS با لیست سفید تک‌آی‌پی — برای رد کردن لاگین و لابی بازی‌ها (پلی‌استیشن، فورتنایت، یوتیوب) از سرور شما، بدون VPN و بدون رد کردن ترافیک بازی.
+  <b>سرویس ثبت و مدیریت Smart DNS — لاگین و لابی بازی‌ها را از سرور خودتان رد کنید، بدون VPN و بدون رد کردن ترافیک بازی.</b><br>
+  پلی‌استیشن · فورتنایت · یوتیوب · روبلاکس · استیم · ایکس‌باکس · بیش از ۵۰ بازی
+</p>
+
+<p align="center">
+  <a href="https://github.com/Mamali63/hachi-smart-dns/releases"><img src="https://img.shields.io/badge/%E2%AC%87%20%D8%AF%D8%A7%D9%86%D9%84%D9%88%D8%AF%20%D9%86%D8%B1%D9%85%E2%80%8C%D8%A7%D9%81%D8%B2%D8%A7%D8%B1%20%D8%A7%D9%86%D8%AF%D8%B1%D9%88%DB%8C%D8%AF-14b8a6?style=for-the-badge&logo=android" alt="دانلود نرم‌افزار اندروید"></a>
+  <a href="#شروع-سریع"><img src="https://img.shields.io/badge/%F0%9F%9A%80%20%D8%B4%D8%B1%D9%88%D8%B9%20%D8%B3%D8%B1%DB%8C%D8%B9-0ea5e9?style=for-the-badge" alt="شروع سریع"></a>
 </p>
 
 > **وضعیت:** نسخهٔ کامل — هستهٔ پایتون + اسکریپت نصب خودکار + پنل ادمین + نرم‌افزار اندروید.
+
+## ✨ امکانات
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎮 رد کردن بازی‌ها
+لاگین و لابی **۵۴ بازی** (فورتنایت، پلی‌استیشن، استیم، ایکس‌باکس، نینتندو، روبلاکس، یوتیوب و…) از سرور شما رد می‌شود — دانلود و خود بازی مستقیم می‌ماند.
+
+</td>
+<td width="50%">
+
+### 🔑 یک آی‌پی برای هر مشتری
+هر مشتری فقط یک ورودی **/32** در لیست سفید دارد. با ثبت تازه، آی‌پی قبلی **جایگزین** می‌شود — هرگز اضافه نمی‌شود.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🖥️ پنل ادمین
+پنل وب فارسی و راست‌به‌چپ — ساخت، تمدید و حذف یوزر، افزودن و حذف دامنه‌های بازی، مدیریت لیست سفید و سیاه، تغییر رمز ادمین.
+
+</td>
+<td width="50%">
+
+### 📱 نرم‌افزار اندروید
+مشتری فقط **کد یوزر** را می‌زند و استارت می‌زند — آدرس سرور را لازم نیست وارد کند. برنامه VPN نیست؛ فقط آی‌پی خانه را ثبت می‌کند.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🚫 لیست سیاه
+دامنه‌هایی که **اصلاً باز نمی‌شوند** (NXDOMAIN) — یک سایت را بلاک کن، یا تست کن که DNS کار می‌کند: اگر سایت باز نشد یعنی DNS دارد کار می‌دهد.
+
+</td>
+<td width="50%">
+
+### 🐍 فقط کتابخانهٔ استاندارد پایتون
+هستهٔ سرور **فقط با کتابخانهٔ استاندارد پایتون** نوشته شده — بدون وابستگی اضافه، بدون دیتابیس جدا. با یک دستور همه‌چیز نصب می‌شود.
+
+</td>
+</tr>
+</table>
 
 ## فهرست
 
@@ -60,6 +113,10 @@ Admin panel: http://SERVER_IP:8080  (first login: admin / admin — change it!)
 ## نرم‌افزار اندروید
 
 نرم‌افزار (`client/hachi-dns.apk`، نسخهٔ ۱٫۲٫۰): مشتری فقط **کد یوزر** را می‌زند و استارت می‌زند — آدرس سرور را لازم نیست وارد کند. برنامه VPN نیست؛ فقط آی‌پی خانه را ثبت می‌کند و باید روی همان وای‌فای خانه باز شود.
+
+<p align="center">
+  <a href="https://github.com/Mamali63/hachi-smart-dns/releases"><img src="https://img.shields.io/badge/%E2%AC%87%20%D8%AF%D8%A7%D9%86%D9%84%D9%88%D8%AF%20hachi--dns.apk%20(v1.2.0)-14b8a6?style=for-the-badge&logo=android" alt="دانلود hachi-dns.apk نسخه ۱٫۲٫۰"></a>
+</p>
 
 **دانلود نرم‌افزار:** از بخش [Releases](https://github.com/Mamali63/hachi-smart-dns/releases) همین ریپو، فایل `hachi-dns.apk` را دانلود کنید.
 
