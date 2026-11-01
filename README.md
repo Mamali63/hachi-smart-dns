@@ -7,16 +7,69 @@
 <h1 align="center">Hachi Smart DNS</h1>
 
 <p align="center">
-  <a href="https://github.com/Mamali63/hachi-smart-dns/releases"><img src="https://img.shields.io/github/v/release/Mamali63/hachi-smart-dns" alt="Release"></a>
-  <a href="https://github.com/Mamali63/hachi-smart-dns/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPL%20v3-blue.svg" alt="License"></a>
-  <a href="https://github.com/Mamali63/hachi-smart-dns/stargazers"><img src="https://img.shields.io/github/stars/Mamali63/hachi-smart-dns?style=social" alt="Stars"></a>
+  <a href="https://github.com/Mamali63/hachi-smart-dns/releases"><img src="https://img.shields.io/github/v/release/Mamali63/hachi-smart-dns?style=for-the-badge&color=0ea5e9" alt="Release"></a>
+  <a href="https://github.com/Mamali63/hachi-smart-dns/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPL%20v3-14b8a6?style=for-the-badge" alt="License"></a>
+  <a href="https://github.com/Mamali63/hachi-smart-dns/stargazers"><img src="https://img.shields.io/github/stars/Mamali63/hachi-smart-dns?style=for-the-badge&color=2563eb" alt="Stars"></a>
 </p>
 
 <p align="center">
-A registration and management service for Smart DNS with a single-IP whitelist — route game login and lobbies (PlayStation, Fortnite, YouTube) through your own server, without a VPN and without proxying game traffic.
+  <b>Smart DNS registration &amp; management — route game logins and lobbies through your own server, without a VPN and without proxying game traffic.</b><br>
+  PlayStation · Fortnite · YouTube · Roblox · Steam · Xbox · 50+ games
+</p>
+
+<p align="center">
+  <a href="https://github.com/Mamali63/hachi-smart-dns/releases"><img src="https://img.shields.io/badge/%E2%AC%87%20Download%20Android%20App-14b8a6?style=for-the-badge&logo=android" alt="Download Android App"></a>
+  <a href="#quick-start"><img src="https://img.shields.io/badge/%F0%9F%9A%80%20Quick%20Start-0ea5e9?style=for-the-badge" alt="Quick Start"></a>
 </p>
 
 > **Status:** Full version — Python core + automatic installer + admin panel + Android app.
+
+## ✨ Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎮 Game routing
+Route login &amp; lobby traffic for **54 games** (Fortnite, PlayStation, Steam, Xbox, Nintendo, Roblox, YouTube…) through your server — game downloads and gameplay stay direct.
+
+</td>
+<td width="50%">
+
+### 🔑 One IP per customer
+Each customer has a single **/32** whitelist entry. A new registration **replaces** the old IP — it never adds one.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🖥️ Admin panel
+Persian, right-to-left web panel — create, renew and delete users, add and remove game domains, manage the whitelist and blocklist, change the admin password.
+
+</td>
+<td width="50%">
+
+### 📱 Android app
+The customer just enters a **code** and presses Start — no server address to type. The app is not a VPN; it only registers the home IP.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🚫 Blocklist
+Domains that **never open** (NXDOMAIN) — block a site, or test that the DNS is working: block a site, and if it does not open, the DNS works.
+
+</td>
+<td width="50%">
+
+### 🐍 Python stdlib only
+The server core uses **only the Python standard library** — no extra dependencies, no database to install. One command installs everything.
+
+</td>
+</tr>
+</table>
 
 ## Table of Contents
 
@@ -60,6 +113,10 @@ Open the panel, change the password, pick a user and months and create it; give 
 ## Android app
 
 The app (`client/hachi-dns.apk`, version 1.2.0): the customer just enters the **user code** and presses Start — no server address to enter. The app is not a VPN; it only registers the home IP and must be opened on the same home Wi-Fi.
+
+<p align="center">
+  <a href="https://github.com/Mamali63/hachi-smart-dns/releases"><img src="https://img.shields.io/badge/%E2%AC%87%20Download%20hachi--dns.apk%20(v1.2.0)-14b8a6?style=for-the-badge&logo=android" alt="Download hachi-dns.apk v1.2.0"></a>
+</p>
 
 **Download the app:** from the [Releases](https://github.com/Mamali63/hachi-smart-dns/releases) of this repo, download `hachi-dns.apk`.
 
